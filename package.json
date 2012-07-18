@@ -1,0 +1,12 @@
+{
+    "name": "cedar-truck",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node app"
+    },
+    "dependencies": {
+        "connect": "~ 2.3.9",
+        "request": "~ 2.9.23"
+    }
+}

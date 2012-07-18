@@ -1,4 +1,4 @@
-cedartruck
-==========
-
-truck of the cedar
+    $ npm install
+    $ node app
+    
+port 4000
