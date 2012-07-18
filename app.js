@@ -16,5 +16,5 @@ var server = connect()
         else
             next();
     })
-    .use(connect.static(__dirname + '/../cedar'))
+    .use(connect.static(__dirname + '/public'))
     .listen(4000);
