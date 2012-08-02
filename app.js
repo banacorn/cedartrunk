@@ -3,6 +3,7 @@ var connect = require('connect'),
     path    = require('path');
 
 var urlRewrite = function (req, res, next) {
+
     if (req.headers.referer && path.extname(req.url) !== '')
         req.url = '/' + path.relative('/' + path.dirname(path.relative('http://' + req.headers.host, req.headers.referer)), req.url);          
     else
@@ -12,7 +13,7 @@ var urlRewrite = function (req, res, next) {
 
 var xhr = function (req, res, next) {
     if (req.headers['X-Requested-With'.toLowerCase()])
-        request('http://itswindtw.info:9000' + req.url).pipe(res);
+        request('http://itswindtw.info:9001' + req.url).pipe(res);
     else
         next();
 }
