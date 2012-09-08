@@ -3,10 +3,12 @@ var connect = require('connect'),
     path    = require('path');
 
 var urlRewrite = function (req, res, next) {
-    if (req.headers.referer && path.extname(req.url) !== '')
+    if (req.headers.referer) {
         req.url = '/' + path.relative('/' + path.dirname(path.relative('http://' + req.headers.host, req.headers.referer)), req.url);          
-    else
+        req.url = req.url.replace(/\/\.\./g, '');
+    } else {
         req.url = '';         
+    }
     next();        
 };
 
@@ -18,12 +20,12 @@ var xhr = function (req, res, next) {
 }
 
 var api = function (req, res, next) {
-    var apiReq = /^\/api\//.test(req.url)
-
-    if (apiReq) 
+    var apiReq = /\/api\//.test(req.url)
+    if (apiReq) {
         request('http://itswindtw.info:9001' + req.url).pipe(res);
-    else
+    } else {
         next()
+    }
 }
 
 var server0 = connect()
