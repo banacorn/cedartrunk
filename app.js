@@ -12,6 +12,7 @@ var urlRewrite = function (req, res, next) {
     next();        
 };
 
+// deprecated
 var xhr = function (req, res, next) {
     if (req.headers['X-Requested-With'.toLowerCase()])
         request('http://itswindtw.info:9001' + req.url).pipe(res);
@@ -28,14 +29,14 @@ var api = function (req, res, next) {
     }
 }
 
-var server0 = connect()
+var serverPro = connect()
     .use(urlRewrite)
     .use(api)
     .use(connect.static(__dirname + '/public'))
     .listen(4000);
     
     
-var server1 = connect()
+var serverDev = connect()
     .use(urlRewrite)
     .use(api)
     .use(connect.static(__dirname + '/../cedar'))
