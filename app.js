@@ -7,6 +7,7 @@ var staticAssets = [
     'images',
     'scripts',
     'stylesheets',
+    'templates',
     'fonts'
 ]
 
