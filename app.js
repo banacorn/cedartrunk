@@ -8,23 +8,33 @@ var staticAssets = [
     'scripts',
     'stylesheets',
     'templates',
-    'fonts'
+    'fonts',
+    'api'
 ]
 
 
 
 var urlRewrite = function (req, res, next) {
-    if (req.headers.referer || /\/scripts\//.test(req.url)) {
-        req.url = '/' + path.relative('/' + path.dirname(path.relative('http://' + req.headers.host, req.headers.referer)), req.url);          
-        req.url = req.url.replace(/\/\.\./g, '');
-    } else {
-        req.url = '';         
-    }
+
+
+    // if (req.headers.referer || /\/scripts\//.test(req.url)) {
+
+    //     req.url = '/' + path.relative('/' + path.dirname(path.relative('http://' + req.headers.host, req.headers.referer)), req.url);          
+    //     req.url = req.url.replace(/\/\.\./g, '');
+    //     console.log(req.url)
+    // } else {
+    //     req.url = '';
+    // }
+
 
     // is not static asset request
     notStatic = staticAssets.indexOf(req.url.split(path.sep)[1]) == -1;
     if (notStatic)
         req.url = '/'
+
+    
+    // console.log(req.url)
+    // console.log('===========')
 
     next();        
 };
@@ -54,7 +64,7 @@ var serverPro = connect()
     .use(connect.static(__dirname + '/public'))
     .listen(4000);
     
-    
+
 var serverDev = connect()
     .use(urlRewrite)
     .use(api)
